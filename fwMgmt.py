@@ -40,13 +40,14 @@ class Rule:
     tozone: str
     source: list
     destination: list
+    service: list
     action: Actions
     log_end: bool
     uuid: str
 
     def return_dict(self):
         return dict(name=self.name, description=self.description, fromzone=self.fromzone, tozone=self.tozone,
-                    source=self.source, destination=self.destination, action=self.action.name, log_end=self.log_end)
+                    source=self.source, destination=self.destination, service=self.service, action=self.action.name, log_end=self.log_end)
 
 
 class FirewallManagement:

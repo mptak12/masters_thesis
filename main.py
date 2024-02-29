@@ -1,6 +1,8 @@
+import time
+
 from fwMgmt import *
 from xmlApi import *
-from getCredentials import *
+from tools import *
 
 if __name__ == '__main__':
     # warnings.filterwarnings('ignore')
@@ -13,11 +15,17 @@ if __name__ == '__main__':
     logger = PythonLogCollector(user_credentials[0], user_credentials[1])
     logger.get_botnet_report()
     logger.parse_logs_xml()
-    report = logger.get_botnet_report()
+    report = logger.get_report_df()
 
-    # TODO: decide if rule change is needed
+    ipFilter = IpFilter(report)
+    ip_list = ipFilter.get_filtered_list()
 
-    ip_list = ["10.10.10.11", "192.168.10.1", "1.1.1.1"]
+    if ip_list is None:
+        print("Host blocking is not necessary, exiting...")
+        time.sleep(2)
+        exit()
+
+    print(f"Selected IP(s) will be blocked: {ip_list}")
 
     fw11 = FirewallManagement(user_credentials[0], user_credentials[2], user_credentials[3])
 
@@ -36,6 +44,7 @@ if __name__ == '__main__':
                                 tozone="any",
                                 source=['blocked hosts'],
                                 destination=['blocked hosts'],
+                                service=["any",],
                                 action=Actions.deny,
                                 log_end=True,
                                 uuid="1")

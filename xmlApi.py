@@ -33,7 +33,7 @@ class PythonLogCollector:
                         'range': result_attributes.get('range')}
 
             for entry_element in result_element.findall('.//entry'):
-                confidence = entry_element.find('confidence').text
+                confidence = int(entry_element.find('confidence').text)
                 src = entry_element.find('src').text
                 srcuser = entry_element.find('srcuser').text
                 vsys = entry_element.find('vsys').text
@@ -46,9 +46,7 @@ class PythonLogCollector:
                             'description': description}
                 data.append(row_data.copy())
 
-        df = pd.DataFrame(data)
-        print(df)
-        self.botnetDf = df
+        self.botnetDf = pd.DataFrame(data)
 
-    def get_report_dataframe(self):
+    def get_report_df(self):
         return self.botnetDf
