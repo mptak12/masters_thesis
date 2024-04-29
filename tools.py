@@ -47,7 +47,7 @@ class IpFilter:
     """
     input_df: pd.DataFrame
     # IP addresses with 'confidence' level == 3 will be added to block list if description matched following keywords:
-    keywords = ["malicious URL", "executable", "registered", "unknown", "TCP", "UDP"]
+    keywords = ["malicious URL", "executable", "registered", "unknown", "TCP", "UDP", "malware"]
 
     def __init__(self, data: pd.DataFrame):
         self.input_df = data

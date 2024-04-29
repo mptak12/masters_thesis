@@ -174,8 +174,9 @@ class FirewallManagement:
                 new_addr = objects.AddressObject(f"blocked_{ip}", f"{ip}")
                 new_addr_objects.append(new_addr)
                 self.fw.add(new_addr)
-                # create new IP address on firewall
-                new_addr.create()
+
+        # create new IP addresses on firewall
+        new_addr_objects[0].create_similar()
 
         # extend objects list in Address Group
         objects.AddressGroup.refreshall(self.fw, add=True)
@@ -185,7 +186,7 @@ class FirewallManagement:
         for addr_object in new_addr_objects:
             edited_addr_group.static_value.append(addr_object.name)
 
-        edited_addr_group.apply()
+        edited_addr_group.create()
 
     def commit_conf(self):
         """
