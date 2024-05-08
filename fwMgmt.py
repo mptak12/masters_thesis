@@ -176,7 +176,11 @@ class FirewallManagement:
                 self.fw.add(new_addr)
 
         # create new IP addresses on firewall
-        new_addr_objects[0].create_similar()
+        try:
+            new_addr_objects[0].create_similar()
+        except IndexError:
+            # existing objects are the same as in botnet report
+            pass
 
         # extend objects list in Address Group
         objects.AddressGroup.refreshall(self.fw, add=True)
