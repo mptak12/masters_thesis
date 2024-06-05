@@ -11,4 +11,7 @@ initialConfig.py - allows user to retrieve firewall configuration same as in the
 haConfiguration.py - allows user to configure HA cluster same as in the study.
 
 This code is part of a Master's Thesis titled: Remote Monitoring and Configuration of Palo Alto Networks PA-440 Firewalls Using Python.  
-Author: inż. Michał Ptak
+Research was carried out at AGH University of Science and Technology in Krakow.
+  
+Author: inż. Michał Ptak  
+Supervisor: prof. dr hab. inż. Katarzyna Kosek-Szott
